@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { themeSettings } from "theme";
 import Dashboard from "pages/dashboard"
+import Login from "pages/login"
+import Signup from "pages/signup";
 import Layout from "pages/layout"
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
             <Route element={<Layout />}>
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
             </Route>
           </Routes>
         </ThemeProvider>

@@ -7,23 +7,21 @@ import {
   SettingsOutlined,
   ArrowDropDownOutlined,
 } from "@mui/icons-material";
+import { Button } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import { useDispatch } from "react-redux";
 import { setMode } from "state";
 import profileImage from "assets/ErikArvidHosszu.png";
 import {
   AppBar,
-  Icon,
   IconButton,
   InputBase,
   Toolbar,
   useTheme,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
-function Navbar({
-  isSidebarOpen,
-  setIsSidebarOpen
-}) {
+function Navbar({ isSidebarOpen, setIsSidebarOpen }) {
   const dispatch = useDispatch();
   const theme = useTheme();
 
@@ -33,6 +31,7 @@ function Navbar({
         position: "static",
         background: "none",
         boxShadow: "none",
+        width: "100%",
       }}
     >
       <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -66,6 +65,7 @@ function Navbar({
           <IconButton>
             <SettingsOutlined sx={{ fontSize: "25px" }} />
           </IconButton>
+          <Button color="inherit"><Link to={"/login"} style={{textDecoration:"none", color:"inherit"}}>Login</Link></Button>
         </FlexBetween>
       </Toolbar>
     </AppBar>
