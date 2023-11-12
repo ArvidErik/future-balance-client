@@ -21,7 +21,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
-function Navbar({ isSidebarOpen, setIsSidebarOpen }) {
+function Navbar({ isSidebarOpen, setIsSidebarOpen, username }) {
   const dispatch = useDispatch();
   const theme = useTheme();
 
@@ -62,10 +62,11 @@ function Navbar({ isSidebarOpen, setIsSidebarOpen }) {
               <LightModeOutlined sx={{ fontSize: "25px" }} />
             )}
           </IconButton>
-          <IconButton>
-            <SettingsOutlined sx={{ fontSize: "25px" }} />
-          </IconButton>
+          {!username?
           <Button color="inherit"><Link to={"/login"} style={{textDecoration:"none", color:"inherit"}}>Login</Link></Button>
+          :
+          <Button color="inherit"><Link to={"/logout"} style={{textDecoration:"none", color:"inherit"}}>Logout</Link></Button>
+        }
         </FlexBetween>
       </Toolbar>
     </AppBar>

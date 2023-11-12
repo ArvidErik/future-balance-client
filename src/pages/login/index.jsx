@@ -1,12 +1,14 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import Axios from "axios";
 
-function Login() {
+function Login({setUsername}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState("");
+
+  const navigate = useNavigate()
 
   const submitForm = async () => {
     try {
@@ -20,24 +22,16 @@ function Login() {
         console.log(response.data);
         setLoginStatus(true);
         localStorage.setItem("token", response.data.authToken);
+        localStorage.setItem("username", response.data.name)
+        localStorage.setItem("userid", response.data.id)
+        setUsername(response.data.name)
+        navigate("/dashboard")
       }
     } catch (err) {
       console.log(err);
     }
   };
 
-  const verifAuth = async () => {
-    try{
-      const result = await Axios.get("http://localhost:5001/users/user", {
-        headers: {
-          "x-access-token": localStorage.getItem("token")
-        }
-      })
-      console.log(result);
-    } catch (err) {
-      console.log(err);
-    }
-  }
 
   return (
     <Box
@@ -85,11 +79,6 @@ function Login() {
         <Button color="inherit" onClick={submitForm}>
           Login
         </Button>
-        {loginStatus ? (
-          <Button color="inherit" onClick={verifAuth}>
-            Auth
-          </Button>
-        ) : null}
         <Typography variant="p" sx={{ fontSize: "11px" }}>
           If you don't have an account yet, register {` `}
         </Typography>

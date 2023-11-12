@@ -6,7 +6,7 @@ import { UseSelector } from "react-redux";
 import Navbar from "components/Navbar";
 import SideBar from "components/Sidebar";
 
-const Layout = () => {
+const Layout = ({username}) => {
   const isNonMobile = useMediaQuery("(min-width: 600px)");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   return (
@@ -21,6 +21,7 @@ const Layout = () => {
         <Navbar
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
+          username={username}
         />
         <Outlet />
       </Box>

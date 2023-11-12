@@ -1,6 +1,6 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { themeSettings } from "theme";
@@ -8,10 +8,14 @@ import Dashboard from "pages/dashboard"
 import Login from "pages/login"
 import Signup from "pages/signup";
 import Layout from "pages/layout"
+import Logout from "pages/logout";
+
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+
+  const [username, setUsername] = useState("")
 
   return (
     <div className="app">
@@ -19,10 +23,11 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Routes>
-            <Route element={<Layout />}>
+            <Route element={<Layout username={username} />}>
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="/dashboard" element={<Dashboard username={username} />} />
+              <Route path="/login" element={<Login setUsername={setUsername} />} />
+              <Route path="/logout" element={<Logout setUsername={setUsername} />} />
               <Route path="/signup" element={<Signup />} />
             </Route>
           </Routes>
