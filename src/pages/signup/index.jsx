@@ -11,7 +11,7 @@ function Signup() {
   const [password2, setpassword2] = useState("");
   const [message, setMessage] = useState("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const createUser = async () => {
     if (name == "" || email == "" || password == "" || password2 == "") {
@@ -22,15 +22,17 @@ function Signup() {
     }
 
     if (password === password2) {
-      const newUser = { "name": name, "email": email, "password": password };
-
       try {
-        const response = await axios.post(`http://localhost:5001/users/signup`, {
-          newUser
-        });
+        const response = await axios.post(
+          `http://localhost:5001/users/signup`,
+          {
+            name: name,
+            password: password,
+            email: email,
+          }
+        );
         console.log(response);
-        navigate("/login")
-
+        navigate("/login");
       } catch (error) {
         console.log(error);
       }
@@ -85,6 +87,7 @@ function Signup() {
         />
         <TextField
           required
+          type="password"
           id="password-input"
           label="Password"
           variant="outlined"
@@ -93,6 +96,7 @@ function Signup() {
         />
         <TextField
           required
+          type="password"
           id="confirm-input"
           label="Confirm Password"
           variant="outlined"

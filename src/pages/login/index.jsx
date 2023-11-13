@@ -6,7 +6,8 @@ import Axios from "axios";
 function Login({setUsername}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loginStatus, setLoginStatus] = useState("");
+  const [message, setmessage] = useState("");
+
 
   const navigate = useNavigate()
 
@@ -17,10 +18,9 @@ function Login({setUsername}) {
         password: password,
       });
       if (!response.data.auth) {
-        setLoginStatus(false);
       } else {
-        console.log(response.data);
-        setLoginStatus(true);
+        console.log(response.error);
+        setmessage(response.message)
         localStorage.setItem("token", response.data.authToken);
         localStorage.setItem("username", response.data.name)
         localStorage.setItem("userid", response.data.id)
@@ -28,7 +28,8 @@ function Login({setUsername}) {
         navigate("/dashboard")
       }
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
+      setmessage(err.response.data.message)
     }
   };
 
@@ -68,6 +69,7 @@ function Login({setUsername}) {
           }}
         />
         <TextField
+          type="password"
           id="password-login-input"
           label="Password"
           variant="outlined"
@@ -76,6 +78,18 @@ function Login({setUsername}) {
             setPassword(e.target.value);
           }}
         />
+        {message && (
+          <Box
+            sx={{
+              backgroundColor: "rgba(255,68,90,.2)",
+              width: "50%",
+              padding: "10px",
+              borderRadius: "5px",
+            }}
+          >
+            {message}
+          </Box>
+        )}
         <Button color="inherit" onClick={submitForm}>
           Login
         </Button>

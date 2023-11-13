@@ -9,7 +9,7 @@ import Login from "pages/login"
 import Signup from "pages/signup";
 import Layout from "pages/layout"
 import Logout from "pages/logout";
-
+import Transactions from "pages/transactions";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -29,6 +29,7 @@ function App() {
               <Route path="/login" element={<Login setUsername={setUsername} />} />
               <Route path="/logout" element={<Logout setUsername={setUsername} />} />
               <Route path="/signup" element={<Signup />} />
+              <Route path="/transactions" element={<Transactions/>} />
             </Route>
           </Routes>
         </ThemeProvider>
