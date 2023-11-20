@@ -10,12 +10,20 @@ import Signup from "pages/signup";
 import Layout from "pages/layout"
 import Logout from "pages/logout";
 import Transactions from "pages/transactions";
+import { useEffect } from "react";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
   const [username, setUsername] = useState("")
+
+  useEffect(()=>{
+    const user = localStorage.getItem('username')
+    if (user) {
+      setUsername(user)
+    }
+  }, [])
 
   return (
     <div className="app">
