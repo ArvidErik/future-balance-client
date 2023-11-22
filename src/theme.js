@@ -17,30 +17,33 @@ export const tokensDark = {
     },
     primary: {
       // blue
-      100: "#d3d4de",
-      200: "#a6a9be",
-      300: "#7a7f9d",
-      400: "#4d547d",
-      500: "#21295c",
-      600: "#191F45", // manually adjusted
-      700: "#141937",
-      800: "#0d1025",
-      900: "#070812",
+      100: "#cdd1cf",
+      200: "#9ba2a0",
+      300: "#697470",
+      400: "#374541",
+      500: "#051711",
+      600: "#04120e",
+      700: "#030e0a",
+      800: "#020907",
+      900: "#010503"
     },
     secondary: {
       // yellow
-      50: "#f0f0f0", // manually adjusted
-      100: "#fff6e0",
-      200: "#ffedc2",
-      300: "#ffe3a3",
-      400: "#ffda85",
-      500: "#ffd166",
-      600: "#cca752",
-      700: "#997d3d",
-      800: "#665429",
-      900: "#332a14",
+      50: "#defaf0", // manually adjusted
+      100: "#cdf7e8",
+      200: "#9bf0d1",
+      300: "#68e8b9",
+      400: "#36e1a2",
+      500: "#04d98b",
+      600: "#03ae6f",
+      700: "#028253",
+      800: "#025738",
+      900: "#012b1c"
     },
   };
+  
+
+
   
   // function that reverses the color palette
   function reverseTokens(tokensDark) {

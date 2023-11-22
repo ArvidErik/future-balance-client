@@ -1,10 +1,11 @@
-import { Container, Typography, Button } from "@mui/material";
+import { Container, Typography, Button, Box } from "@mui/material";
+import BalanceChart from "components/BalanceChart";
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Dashboard({ username }) {
 
-  console.log("username is", username);
+function Dashboard({ username }) {
+  
 
   return !username ? (
     <Container
@@ -27,9 +28,11 @@ function Dashboard({ username }) {
     </Container>
   ) : (
     <Container>
-      <Typography variant="h4" mt={5}>
-        Welcome {username}
-      </Typography>
+      <Box></Box>
+      <Box height="75vh">
+        <BalanceChart/>
+      </Box>
+
     </Container>
   );
 }
