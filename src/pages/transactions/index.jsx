@@ -36,7 +36,7 @@ function Transactions() {
   const [data, setData] = useState("")
 
   useEffect(()=> {
-    axios.get("http://localhost:5001/transactions/get", {
+    axios.get("http://localhost:5001/transactions/transactionfamilies", {
       headers:{
         userId: localStorage.getItem("userid")
       }
@@ -50,7 +50,7 @@ function Transactions() {
     })
   }, [])
 
-  console.log(data.data);
+  console.log("DATA", data.data);
   
   return (
     <Box m="1.5rem 2.5rem" 
@@ -99,7 +99,7 @@ function Transactions() {
       </Box>
         <DataGrid
           getRowId={(row) => row._id}
-          rows={(data && data.data) || []}
+          rows={(data && data.data.filter(data => data.type == "income")) || []}
           columns={columns}
         />
       </Box>
@@ -143,7 +143,7 @@ function Transactions() {
       </Box>
         <DataGrid
           getRowId={(row) => row._id}
-          rows={(data && data.data) || []}
+          rows={(data && data.data.filter(data => data.type == "expense")) || []}
           columns={columns}
         />
       </Box>

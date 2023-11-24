@@ -1,14 +1,47 @@
 import { Container, Typography, Button, Box, FormControl, InputLabel, Input, Select, MenuItem } from "@mui/material";
 import BalanceChart from "components/BalanceChart";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import data from "../../data/kpi-data.json";
 import StatBox from "components/StatBox";
+import axios from "axios";
 
 function Dashboard({ username }) {
 
-    const  [view, setView] = useState("units")
+    const  [year, setyear] = useState("all")
     const kpiData = data;
+    const [balanceData, setBalanceData] = useState([])
+
+    const now = Date.now()
+    const today = new Date(now)
+    
+    useEffect(()=>{
+      
+      axios.get("http://localhost:5001/transactions/balancedata", {
+      headers:{
+        userId: localStorage.getItem("userid")
+      }
+      }
+    )
+    .then((res)=>{
+      const obj = {
+        id: "balance",
+        color: "hsl(0, 70%, 50%)",
+        data: res.data
+      }
+      if (year !== "all") {
+        setBalanceData([...obj].filter(e => e.data.x.substring(e.data.x.length-4)=={year}))
+      } else {
+        setBalanceData([obj])
+      }
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+
+    }, [year])
+
+    console.log("BALANCE",  balanceData);
 
   return !username ? (
     <Container
@@ -45,16 +78,20 @@ function Dashboard({ username }) {
       <FormControl sx={{ mt: "1rem" }}>
           <InputLabel>Year</InputLabel>
           <Select
-            value={view}
-            label="View"
-            onChange={(e) => setView(e.target.value)}
+            value={year}
+            label="Year"
+            onChange={(e) => setyear(e.target.value)}
           >
-            <MenuItem value="sales">Sales</MenuItem>
-            <MenuItem value="units">Units</MenuItem>
+            <MenuItem value="all">All</MenuItem>
+            <MenuItem value={today.getFullYear()}>{today.getFullYear()}</MenuItem>
+            <MenuItem value={today.getFullYear()+1}>{today.getFullYear()+1}</MenuItem>
+            <MenuItem value={today.getFullYear()+2}>{today.getFullYear()+2}</MenuItem>
+            <MenuItem value={today.getFullYear()+3}>{today.getFullYear()+3}</MenuItem>
+            <MenuItem value={today.getFullYear()+4}>{today.getFullYear()+4}</MenuItem>
           </Select>
       </FormControl>
       <Box height="60vh" mt={3}>
-        <BalanceChart />
+        <BalanceChart data={balanceData} year={year}/>
       </Box>
     </Container>
   );

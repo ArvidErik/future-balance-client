@@ -3,7 +3,7 @@ import { ResponsiveLine } from "@nivo/line";
 import { useTheme } from "@emotion/react";
 import { Typography } from "@mui/material";
 
-function BalanceChart() {
+function BalanceChart({data}) {
   const theme = useTheme();
 
   return (
@@ -12,61 +12,7 @@ function BalanceChart() {
         Balace Overview
     </Typography>
     <ResponsiveLine
-      data={[{
-        "id": "japan",
-        "color": "hsl(0, 70%, 50%)",
-        "data": [
-          {
-            "x": "plane",
-            "y": 13
-          },
-          {
-            "x": "helicopter",
-            "y": 43
-          },
-          {
-            "x": "boat",
-            "y": 56
-          },
-          {
-            "x": "train",
-            "y": 89
-          },
-          {
-            "x": "subway",
-            "y": 115
-          },
-          {
-            "x": "bus",
-            "y": 134
-          },
-          {
-            "x": "car",
-            "y": 156
-          },
-          {
-            "x": "moto",
-            "y": 179
-          },
-          {
-            "x": "bicycle",
-            "y": 296
-          },
-          {
-            "x": "horse",
-            "y": 340
-          },
-          {
-            "x": "skateboard",
-            "y": -120
-    
-          },
-          {
-            "x": "others",
-            "y": -200
-          }
-        ]
-      }]}
+      data={data}
       theme={{
         axis: {
           domain: {
