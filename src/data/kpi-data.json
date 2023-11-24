@@ -1,0 +1,27 @@
+[
+    {
+        "title": "Current Balance",
+        "value": 2443,
+        "increase": "12%",
+        "description": "compared to last month"
+
+    },
+    {
+        "title": "Avg. monthly incomes",
+        "value": 2840,
+        "increase": "4%",
+        "description": "compared to last year"
+    },
+    {
+        "title": "Avg. monthly expenses",
+        "value": 1440,
+        "increase": "4%",
+        "description": "compared to last year"
+    },
+    {
+        "title": "Saving Ratio",
+        "value": "28%",
+        "increase": "4%",
+        "description": "compared to last year"
+    }  
+]

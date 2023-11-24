@@ -1,11 +1,14 @@
-import { Container, Typography, Button, Box } from "@mui/material";
+import { Container, Typography, Button, Box, FormControl, InputLabel, Input, Select, MenuItem } from "@mui/material";
 import BalanceChart from "components/BalanceChart";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import data from "../../data/kpi-data.json";
+import StatBox from "components/StatBox";
 
 function Dashboard({ username }) {
-  
+
+    const  [view, setView] = useState("units")
+    const kpiData = data;
 
   return !username ? (
     <Container
@@ -28,11 +31,31 @@ function Dashboard({ username }) {
     </Container>
   ) : (
     <Container>
-      <Box></Box>
-      <Box height="75vh">
-        <BalanceChart/>
+      <Box
+        mt="20px"
+        display="grid"
+        gridTemplateColumns="repeat(8, 1fr)"
+        gridAutoRows="160px"
+        gap="20px"
+      >
+        {kpiData.map((element) => {
+          return <StatBox {...element} />;
+        })}
       </Box>
-
+      <FormControl sx={{ mt: "1rem" }}>
+          <InputLabel>Year</InputLabel>
+          <Select
+            value={view}
+            label="View"
+            onChange={(e) => setView(e.target.value)}
+          >
+            <MenuItem value="sales">Sales</MenuItem>
+            <MenuItem value="units">Units</MenuItem>
+          </Select>
+      </FormControl>
+      <Box height="75vh" mt={3}>
+        <BalanceChart />
+      </Box>
     </Container>
   );
 }

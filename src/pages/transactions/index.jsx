@@ -2,6 +2,7 @@ import { ThemeContext, useTheme } from '@emotion/react'
 import { Box, Typography } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import axios from 'axios'
+import FlexBetween from 'components/FlexBetween'
 import React, {useEffect, useState} from 'react'
 
 
@@ -52,8 +53,12 @@ function Transactions() {
   console.log(data.data);
   
   return (
-    <Box m="1.5rem 2.5rem">
-      <Typography variant='h4'>Incomes</Typography>
+    <Box m="1.5rem 2.5rem" 
+        display="grid"
+        gridTemplateColumns="repeat(2, 1fr)"
+        gridAutoRows="160px"
+        gap="20px"
+    >
       <Box height="80vh"
       sx={{
         "& .MuiDataGrid-root":{
@@ -71,16 +76,51 @@ function Transactions() {
           backgroundColor: theme.palette.primary.light,
         },
         "& .MuiDataGrid-footerContainer": {
-            backgroundColor: theme.palette.background.alt,
-            color: theme.palette.secondary[100],
-            borderTop: "none",
+          backgroundColor: theme.palette.background.alt,
+          color: theme.palette.secondary[100],
+          borderTop: "none",
         },
         "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
           color: `${theme.palette.secondary[200]} !important`
         }
-
+        
       }}
       >
+      <Typography variant='h4' mb={2}>Incomes</Typography>
+        <DataGrid
+          getRowId={(row) => row._id}
+          rows={(data && data.data) || []}
+          columns={columns}
+        />
+      </Box>
+      <Box height="80vh"
+      sx={{
+        "& .MuiDataGrid-root":{
+          border: "none"
+        },
+        "& .MuiDataGrid-cell":{
+          borderBottom: "none",
+        },
+        "& .MuiDataGrid-columnHeaders": {
+          backgroundColor: theme.palette.background.alt,
+          color: theme.palette.secondary[100],
+          borderBottom: "none",
+        },
+        "& .MuiDataGrid-virtualScroller": {
+          backgroundColor: theme.palette.primary.light,
+        },
+        "& .MuiDataGrid-footerContainer": {
+          backgroundColor: theme.palette.background.alt,
+          color: theme.palette.secondary[100],
+          borderTop: "none",
+        },
+        "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+          color: `${theme.palette.secondary[200]} !important`
+        }
+        
+      }}
+      >
+      <Typography variant='h4' mb={2}>Expenses</Typography>
         <DataGrid
           getRowId={(row) => row._id}
           rows={(data && data.data) || []}

@@ -17,15 +17,15 @@ export const tokensDark = {
     },
     primary: {
       // blue
-      100: "#cdd1cf",
-      200: "#9ba2a0",
-      300: "#697470",
-      400: "#374541",
-      500: "#051711",
-      600: "#04120e",
-      700: "#030e0a",
-      800: "#020907",
-      900: "#010503"
+      100: "#dadbdb",
+      200: "#b5b7b6",
+      300: "#919492",
+      400: "#6c706d",
+      500: "#474c49",
+      600: "#393d3a",
+      700: "#2b2e2c",
+      800: "#1c1e1d",
+      900: "#0e0f0f"
     },
     secondary: {
       // yellow
@@ -40,8 +40,18 @@ export const tokensDark = {
       800: "#025738",
       900: "#012b1c"
     },
+    red:{
+      100: "#fad9da",
+      200: "#f5b4b5",
+      300: "#f18e90",
+      400: "#ec696b",
+      500: "#e74346",
+      600: "#b93638",
+      700: "#8b282a",
+      800: "#5c1b1c",
+      900: "#2e0d0e"
+    }
   };
-  
 
 
   
@@ -79,6 +89,10 @@ export const tokensDark = {
                 ...tokensDark.secondary,
                 main: tokensDark.secondary[300],
               },
+              red: {
+                ...tokensDark.red,
+                main: tokensDark.red[300],
+              },
               neutral: {
                 ...tokensDark.grey,
                 main: tokensDark.grey[500],
@@ -99,6 +113,10 @@ export const tokensDark = {
                 ...tokensLight.secondary,
                 main: tokensDark.secondary[600],
                 light: tokensDark.secondary[700],
+              },
+              red: {
+                ...tokensLight.red,
+                main: tokensLight.red[300],
               },
               neutral: {
                 ...tokensLight.grey,

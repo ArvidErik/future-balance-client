@@ -1,7 +1,7 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { useTheme } from "@emotion/react";
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 function BalanceChart() {
   const theme = useTheme();
@@ -18,19 +18,19 @@ function BalanceChart() {
         "data": [
           {
             "x": "plane",
-            "y": 299
-          },
-          {
-            "x": "helicopter",
-            "y": 236
-          },
-          {
-            "x": "boat",
             "y": 13
           },
           {
+            "x": "helicopter",
+            "y": 43
+          },
+          {
+            "x": "boat",
+            "y": 56
+          },
+          {
             "x": "train",
-            "y": 175
+            "y": 89
           },
           {
             "x": "subway",
@@ -38,15 +38,15 @@ function BalanceChart() {
           },
           {
             "x": "bus",
-            "y": 34
+            "y": 134
           },
           {
             "x": "car",
-            "y": 36
+            "y": 156
           },
           {
             "x": "moto",
-            "y": 138
+            "y": 179
           },
           {
             "x": "bicycle",
@@ -54,15 +54,15 @@ function BalanceChart() {
           },
           {
             "x": "horse",
-            "y": 42
+            "y": 340
           },
           {
             "x": "skateboard",
-            "y": 26
+            "y": 377
           },
           {
             "x": "others",
-            "y": 174
+            "y": 450
           }
         ]
       }]}
