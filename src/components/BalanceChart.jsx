@@ -58,11 +58,12 @@ function BalanceChart() {
           },
           {
             "x": "skateboard",
-            "y": 377
+            "y": -120
+    
           },
           {
             "x": "others",
-            "y": 450
+            "y": -200
           }
         ]
       }]}

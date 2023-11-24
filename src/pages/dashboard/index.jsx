@@ -53,7 +53,7 @@ function Dashboard({ username }) {
             <MenuItem value="units">Units</MenuItem>
           </Select>
       </FormControl>
-      <Box height="75vh" mt={3}>
+      <Box height="60vh" mt={3}>
         <BalanceChart />
       </Box>
     </Container>

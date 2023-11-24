@@ -4,8 +4,6 @@ import {
   DarkModeOutlined,
   Menu as MenuIcon,
   Search,
-  SettingsOutlined,
-  ArrowDropDownOutlined,
 } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import FlexBetween from "components/FlexBetween";

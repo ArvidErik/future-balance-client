@@ -1,5 +1,5 @@
 import { ThemeContext, useTheme } from '@emotion/react'
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, Button } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import axios from 'axios'
 import FlexBetween from 'components/FlexBetween'
@@ -86,7 +86,17 @@ function Transactions() {
         
       }}
       >
+      <Box display="flex" justifyContent="space-between">
       <Typography variant='h4' mb={2}>Incomes</Typography>
+      <Button color='inherit'
+      sx={{backgroundColor:theme.palette.secondary[600],
+          fontSize:"20px",
+          padding: 0,
+          height: "2rem"
+      }}
+      >+</Button>
+
+      </Box>
         <DataGrid
           getRowId={(row) => row._id}
           rows={(data && data.data) || []}
@@ -120,7 +130,17 @@ function Transactions() {
         
       }}
       >
+      <Box display="flex" justifyContent="space-between">
       <Typography variant='h4' mb={2}>Expenses</Typography>
+      <Button color='inherit'
+      sx={{backgroundColor:theme.palette.red[600],
+          fontSize:"20px",
+          padding: 0,
+          height: "2rem"
+      }}
+      >+</Button>
+
+      </Box>
         <DataGrid
           getRowId={(row) => row._id}
           rows={(data && data.data) || []}
