@@ -24,13 +24,23 @@ function Dashboard({ username }) {
       }
     )
     .then((res)=>{
-      const obj = {
+      let obj = {
         id: "balance",
         color: "hsl(0, 70%, 50%)",
         data: res.data
       }
-      if (year !== "all") {
-        setBalanceData([...obj].filter(e => e.data.x.substring(e.data.x.length-4)=={year}))
+      console.log("OBJ DATA IS", obj.data);
+      if (year != "all") {
+        const newArr = [...obj.data].filter(e => e.x.includes(`${year}`))
+
+        console.log("NEWARR", newArr);
+        obj = {
+          id: "balance",
+          color: "hsl(0, 70%, 50%)",
+          data: newArr
+        }
+        console.log("FILTERED OBJ", obj);
+        setBalanceData([obj])
       } else {
         setBalanceData([obj])
       }
@@ -39,9 +49,10 @@ function Dashboard({ username }) {
       console.log(err);
     })
 
+    console.log("BALANCE DATA", balanceData);
+
     }, [year])
 
-    console.log("BALANCE",  balanceData);
 
   return !username ? (
     <Container
