@@ -11,6 +11,7 @@ function Dashboard({ username }) {
     const  [year, setyear] = useState("all")
     const kpiData = data;
     const [balanceData, setBalanceData] = useState([])
+    const [currentBalance, setCurrentBalance] = useState("")
 
     const now = Date.now()
     const today = new Date(now)
@@ -29,7 +30,6 @@ function Dashboard({ username }) {
         color: "hsl(0, 70%, 50%)",
         data: res.data
       }
-      console.log("OBJ DATA IS", obj.data);
       if (year != "all") {
         const newArr = [...obj.data].filter(e => e.x.includes(`${year}`))
 
@@ -44,14 +44,27 @@ function Dashboard({ username }) {
       } else {
         setBalanceData([obj])
       }
+    }).then(()=>{
+      const date = new Date(Date.now())
+      const formattedDate = `${(
+        date.getMonth() + 1
+      ).toString()}-${date.getFullYear()}`
+  
+      const element = balanceData && balanceData[0]?.data.find((obj) =>
+      Object.values(obj).includes(formattedDate))
+      const currentBalance = element.y
+      setCurrentBalance(currentBalance)
+  
+      console.log("CurrentBalance", currentBalance);
     })
     .catch((err)=>{
       console.log(err);
     })
-
-    console.log("BALANCE DATA", balanceData);
-
     }, [year])
+
+    
+
+
 
 
   return !username ? (
