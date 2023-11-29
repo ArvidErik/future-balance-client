@@ -37,7 +37,7 @@ function App() {
               <Route path="/login" element={<Login setUsername={setUsername} />} />
               <Route path="/logout" element={<Logout setUsername={setUsername} />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/transactions" element={<Transactions/>} />
+              <Route path="/transactions" element={<Transactions username={username}/>} />
             </Route>
           </Routes>
         </ThemeProvider>
