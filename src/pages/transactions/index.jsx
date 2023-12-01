@@ -5,7 +5,11 @@ import axios from "axios";
 import FlexBetween from "components/FlexBetween";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import Popper from "@mui/material/Popper";
+import PopupState, { bindToggle, bindPopper } from "material-ui-popup-state";
+import Fade from "@mui/material/Fade";
+import Paper from "@mui/material/Paper";
+import TransForm from "components/TransForm";
 
 const columns = [
   {
@@ -34,6 +38,16 @@ function Transactions({ username }) {
   const theme = useTheme();
 
   const [data, setData] = useState("");
+
+  const [incName, setIncName] = useState("");
+  const [incAmount, setIncAmount] = useState("");
+  const [incStartDate, setIncStartDate] = useState("");
+  const [incEndDate, setIncEndDate] = useState("");
+
+  console.log("INCNAME", incName);
+  console.log("INCAMOUNT", incAmount);
+  console.log("INCStart", incStartDate);
+  console.log("INCEnd", incEndDate);
 
   useEffect(() => {
     axios
@@ -110,17 +124,40 @@ function Transactions({ username }) {
           <Typography variant="h4" mb={2}>
             Incomes
           </Typography>
-          <Button
-            color="inherit"
-            sx={{
-              backgroundColor: theme.palette.secondary[600],
-              fontSize: "20px",
-              padding: 0,
-              height: "2rem",
-            }}
-          >
-            +
-          </Button>
+          <PopupState variant="popper" popupId="demo-popup-popper">
+            {(popupState) => (
+              <div>
+                <Button
+                  variant="contained"
+                  color="inherit"
+                  sx={{
+                    backgroundColor: theme.palette.secondary[600],
+                    fontSize: "20px",
+                    padding: 0,
+                    height: "2rem",
+                  }}
+                  {...bindToggle(popupState)}
+                >
+                  +
+                </Button>
+                <Popper {...bindPopper(popupState)} transition>
+                  {({ TransitionProps }) => (
+                    <Fade {...TransitionProps} timeout={350}>
+                      <Paper>
+                        <TransForm
+                          title={"Add a New Income"}
+                          setIncName={setIncName}
+                          setIncAmount={setIncAmount}
+                          setIncStartDate={setIncStartDate}
+                          setIncEndDate={setIncEndDate}
+                        />
+                      </Paper>
+                    </Fade>
+                  )}
+                </Popper>
+              </div>
+            )}
+          </PopupState>
         </Box>
         <DataGrid
           getRowId={(row) => row._id}
@@ -161,17 +198,34 @@ function Transactions({ username }) {
           <Typography variant="h4" mb={2}>
             Expenses
           </Typography>
-          <Button
-            color="inherit"
-            sx={{
-              backgroundColor: theme.palette.red[600],
-              fontSize: "20px",
-              padding: 0,
-              height: "2rem",
-            }}
-          >
-            +
-          </Button>
+          <PopupState variant="popper" popupId="demo-popup-popper">
+            {(popupState) => (
+              <div>
+                <Button
+                  variant="contained"
+                  color="inherit"
+                  sx={{
+                    backgroundColor: theme.palette.red[600],
+                    fontSize: "20px",
+                    padding: 0,
+                    height: "2rem",
+                  }}
+                  {...bindToggle(popupState)}
+                >
+                  -
+                </Button>
+                <Popper {...bindPopper(popupState)} transition>
+                  {({ TransitionProps }) => (
+                    <Fade {...TransitionProps} timeout={350}>
+                      <Paper>
+                        <TransForm title={"Add a New Expense"} />
+                      </Paper>
+                    </Fade>
+                  )}
+                </Popper>
+              </div>
+            )}
+          </PopupState>
         </Box>
         <DataGrid
           getRowId={(row) => row._id}
