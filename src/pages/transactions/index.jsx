@@ -31,7 +31,7 @@ const columns = [
     field: "to",
     headerName: "To",
     flex: 1,
-  },
+  }
 ];
 
 function Transactions({ username }) {
@@ -43,6 +43,7 @@ function Transactions({ username }) {
   const [incAmount, setIncAmount] = useState("");
   const [incStartDate, setIncStartDate] = useState("");
   const [incEndDate, setIncEndDate] = useState("");
+  const [newTransaction, setNewTransaction] = useState(false)
 
   console.log("INCNAME", incName);
   console.log("INCAMOUNT", incAmount);
@@ -62,9 +63,43 @@ function Transactions({ username }) {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [newTransaction]);
 
   console.log("DATA", data.data);
+
+  function sendIncData() {
+    if (
+      incName != null &&
+      incAmount != null &&
+      incStartDate != null &&
+      incEndDate != null
+    ) {
+      axios
+        .post("http://localhost:5001/transactions/create", {
+          name: incName,
+          amount: incAmount,
+          from: incStartDate,
+          to: incEndDate,
+          type: "income",
+          ownerId: localStorage.getItem("userid"),
+        })
+        .then(() => {
+          console.log("SUCCESS");
+          setNewTransaction(!newTransaction)
+          setIncAmount(null)
+          setIncName(null)
+          setIncEndDate(null)
+          setIncStartDate(null)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+
+  function showDelete(){
+
+  }
 
   return !username ? (
     <Container
@@ -150,6 +185,8 @@ function Transactions({ username }) {
                           setIncAmount={setIncAmount}
                           setIncStartDate={setIncStartDate}
                           setIncEndDate={setIncEndDate}
+                          sendIncData={sendIncData}
+                          bindToggle={{ ...bindToggle(popupState) }}
                         />
                       </Paper>
                     </Fade>
@@ -165,7 +202,7 @@ function Transactions({ username }) {
             (data && data.data.filter((data) => data.type == "income")) || []
           }
           columns={columns}
-        />
+        />     
       </Box>
       <Box
         height="80vh"

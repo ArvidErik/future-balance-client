@@ -20,6 +20,8 @@ export default function TransForm({
   setIncAmount,
   setIncStartDate,
   setIncEndDate,
+  bindToggle,
+  sendIncData
 }) {
 
 
@@ -69,7 +71,7 @@ export default function TransForm({
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DemoContainer components={["DatePicker"]}>
             <DatePicker
-              onChange={(newValue) => setIncStartDate(`${newValue.$M+1}/${newValue.$y}`
+              onChange={(newValue) => setIncStartDate(`${newValue.$y}/${newValue.$M+1}`
                 )}
               label={"Starting month"} views={["month", "year"]} />
           </DemoContainer>
@@ -77,12 +79,14 @@ export default function TransForm({
             <DatePicker
               label={"Select an ending month"}
               views={["month", "year"]}
+              onChange={(newValue) => setIncEndDate(`${newValue.$y}/${newValue.$M+1}`
+                )}
             />
           </DemoContainer>
         </LocalizationProvider>
         <Box>
-          <Button color="inherit">Cancel</Button>
-          <Button color="inherit">Create</Button>
+          <Button color="inherit" {...bindToggle}>Cancel</Button>
+          <Button color="inherit" onClick={sendIncData}>Create</Button>
         </Box>
       </form>
     </Box>
