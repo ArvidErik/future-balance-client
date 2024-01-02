@@ -10,29 +10,12 @@ import PopupState, { bindToggle, bindPopper } from "material-ui-popup-state";
 import Fade from "@mui/material/Fade";
 import Paper from "@mui/material/Paper";
 import TransForm from "components/TransForm";
+import DeleteIcon from '@mui/icons-material/DeleteOutlined';
+import {
+  GridActionsCellItem,
+} from '@mui/x-data-grid';
 
-const columns = [
-  {
-    field: "name",
-    headerName: "Name",
-    flex: 1,
-  },
-  {
-    field: "amount",
-    headerName: "Amount",
-    flex: 1,
-  },
-  {
-    field: "from",
-    headerName: "From",
-    flex: 1,
-  },
-  {
-    field: "to",
-    headerName: "To",
-    flex: 1,
-  }
-];
+
 
 function Transactions({ username }) {
   const theme = useTheme();
@@ -100,6 +83,43 @@ function Transactions({ username }) {
   function showDelete(){
 
   }
+
+  function deleteRow(id){
+    console.log(id);
+    const newArr = [...data.data].filter((e)=> e._id!=id)
+    setData(newArr)
+  }
+
+  const columns = [
+    {
+      field: "name",
+      headerName: "Name",
+      flex: 1,
+    },
+    {
+      field: "amount",
+      headerName: "Amount",
+      flex: 1,
+    },
+    {
+      field: "from",
+      headerName: "From",
+      flex: 1,
+    },
+    {
+      field: "to",
+      headerName: "To",
+      flex: 1,
+    },
+    {
+      field: "actions",
+      headerName: "",
+      flex: .5,
+      sortable: false,
+      renderCell: ({ row }) =>
+        <DeleteIcon color="inherit" sx={{fontSize: "1rem"}} onClick={()=>deleteRow(row._id)}/>
+    }
+  ];
 
   return !username ? (
     <Container
@@ -267,7 +287,7 @@ function Transactions({ username }) {
         <DataGrid
           getRowId={(row) => row._id}
           rows={
-            (data && data.data.filter((data) => data.type == "expense")) || []
+            (data && [...data.data].filter((data) => data.type == "expense")) || []
           }
           columns={columns}
         />
